@@ -300,8 +300,8 @@ namespace jumpE_basic
             public CommandRegistry()
             {
                 print print = new print();
-                whenD whend = new whenD();
-                whenS whens = new whenS();
+                //whenD whend = new whenD();
+                //whenS whens = new whenS();
                 setS setS = new setS();
                 use use = new use(this);
                 //setD setD = new setD();
@@ -321,15 +321,17 @@ namespace jumpE_basic
                 double_func double_func = new double_func(Math_equation,this);
                 string_func string_Func = new string_func(Math_equation, this);
                 int_func int_func = new int_func(Math_equation,this);
+                when when = new when(Math_equation, this);
+                commands.Add("when", when); commands.Add("When", when);
                 commands.Add("useC", useC); commands.Add("usec", useC);
                 commands.Add("print", print); commands.Add("Print", print);
                 commands.Add("inputI", inputI); commands.Add("inputi", inputI);commands.Add("InputI", inputI);
-                commands.Add("whenD", whend); commands.Add("WhenD", whend);
+                //commands.Add("whenD", whend); commands.Add("WhenD", whend);
                 commands.Add("inputS", inputS);commands.Add("inputs", inputS);commands.Add("InputS", inputS);
                 //commands.Add("setS", setS); commands.Add("SetS", setS);
                 commands.Add("string", string_Func);commands.Add("String", string_Func);commands.Add("STRING", string_Func);
                 commands.Add("int", int_func); commands.Add("INT", int_func);
-                commands.Add("whenS", whens); commands.Add("WhenS", whens);
+                //commands.Add("whenS", whens); commands.Add("WhenS", whens);
                 commands.Add("jump", jump); commands.Add("jp", jump); commands.Add("JP", jump); commands.Add("JUMP", jump);
                 commands.Add("double", double_func); commands.Add("DOUBLE", double_func); commands.Add("Double", double_func);
                 /*commands.Add("subtract", subtract); commands.Add("sub", subtract);
@@ -412,8 +414,69 @@ namespace jumpE_basic
 
             }
         }
+        public class when : command_centrall
+        {
+            pre_defined_variable Math_equation;
+            CommandRegistry commands;
+            IDictionary<string, double> drict = new Dictionary<string, double>();
+            public when(pre_defined_variable j, CommandRegistry c)
+            {
+                this.Math_equation = j;
+                this.commands = c;
 
-        public class whenD : command_centrall
+            }
+            public override void Execute(List<string> code, Data D, base_runner Base)
+            {
+
+                try
+                {
+                    string equation = "";
+                    /*if (code.Count() == 2)
+                    {
+                        D.setI(code[1], 0);
+                        this.commands.add_command(code[1], this.Math_equation);
+
+                    }*/ // this will be for booleans when i get around to 
+                    //else { }
+                        for (int i = 2; i < code.Count(); i++)
+                        {
+                            double j;
+                            if (Double.TryParse(code[i], out j))
+                            {
+                                equation += j + " ";
+                            }
+                            else if (code[i] == "+" || code[i] == "-" || code[i] == "/" || code[i] == "*" || code[i] == "sin" || code[i] == "cos" || code[i] == "tan" ||
+                            code[i] == "csc" || code[i] == "sec" || code[i] == "cot" || code[i] == "root" || code[i] == ")" || code[i] == "(" || code[i] == " "||code[i]== "=="||code[i]=="!="||code[i]==">"|| code[i] == "<"||
+                            code[i] == "=>"|| code[i] == "=<"|| code[i] == "!")
+                            {
+                                equation += code[i] + " ";
+                            }
+                            else if (D.isnumvar(code[i]))
+                            {
+                                equation += D.referenceVar(code[i]) + " ";
+                            }
+                        else
+                        {
+                            equation += code[i] + " ";
+                            Debug.WriteLine("not recognized when statement");
+                        }
+                        }
+                        CalculationEngine engine = new CalculationEngine();
+                    bool result = Convert.ToBoolean(engine.Calculate(equation));
+                    if (result)
+                    {
+                        if (D.isnumvar(code[1])){ Base.changePosition((int)D.referenceVar(code[1])); }
+                        else { Base.changePosition(int.Parse(code[1])); }
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Initialization error " + e);
+                }
+            }
+        }
+        /*public class whenD : command_centrall
         {
             public override void Execute(List<string> code, DATA_CONVERTER.Data D, base_runner Base)
             {
@@ -908,7 +971,7 @@ namespace jumpE_basic
                 }
                 
             }
-        }
+        }*/
 
         public class useC : command_centrall
         {
@@ -1444,7 +1507,7 @@ namespace Imported_commands
                                 }
                             }
                             CalculationEngine engine = new CalculationEngine();
-                            D.setI(code[0], D.referenceI(code[0]) + (int)(engine.Calculate(equation, drict)));
+                            D.setI(code[0], D.referenceI(code[0]) * (int)(engine.Calculate(equation, drict)));
 
                         }
                         else if (code[1] == "/=")
@@ -1467,7 +1530,7 @@ namespace Imported_commands
                                 }
                             }
                             CalculationEngine engine = new CalculationEngine();
-                            D.setI(code[0], D.referenceI(code[0]) + (int)(engine.Calculate(equation, drict)));
+                            D.setI(code[0], D.referenceI(code[0]) / (int)(engine.Calculate(equation, drict)));
 
                         }
                         else if(code[1] == "++")
@@ -1476,11 +1539,11 @@ namespace Imported_commands
                         }
                         else if (code[1] == "--")
                         {
-                            D.setI(code[0], D.referenceI(code[0]) + 1);
+                            D.setI(code[0], D.referenceI(code[0]) - 1);
                         }
                         else if (code[1] == "**")
                         {
-                            D.setI(code[0], D.referenceI(code[0]) + 1);
+                            D.setI(code[0], D.referenceI(code[0]) * D.referenceI(code[0]));
                         }
                     }
                     catch
@@ -1584,7 +1647,7 @@ namespace Imported_commands
                                     }
                                 }
                                 CalculationEngine engine = new CalculationEngine();
-                                D.setD(code[0], D.referenceD(code[0]) + (engine.Calculate(equation, drict)));
+                                D.setD(code[0], D.referenceD(code[0]) * (engine.Calculate(equation, drict)));
 
                             }
                             else if (code[1] == "/=")
@@ -1607,7 +1670,7 @@ namespace Imported_commands
                                     }
                                 }
                                 CalculationEngine engine = new CalculationEngine();
-                                D.setD(code[0], D.referenceD(code[0]) + (engine.Calculate(equation, drict)));
+                                D.setD(code[0], D.referenceD(code[0]) / (engine.Calculate(equation, drict)));
 
                             }
                             else if (code[1] == "++")
@@ -1616,11 +1679,11 @@ namespace Imported_commands
                             }
                             else if (code[1] == "--")
                             {
-                                D.setD(code[0], D.referenceD(code[0]) + 1);
+                                D.setD(code[0], D.referenceD(code[0]) - 1);
                             }
                             else if (code[1] == "**")
                             {
-                                D.setD(code[0], D.referenceD(code[0]) + 1);
+                                D.setD(code[0], D.referenceD(code[0]) * D.referenceD(code[0]));
                             }
                             else if (code[1] == "/^")
                             {
