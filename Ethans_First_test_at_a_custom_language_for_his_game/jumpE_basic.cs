@@ -1621,7 +1621,7 @@ namespace Imported_commands
                                     }
                                 }
                                 CalculationEngine engine = new CalculationEngine();
-                                D.setD(code[0], (engine.Calculate(equation, null)));
+                                D.setD(code[0], (engine.Calculate(equation, drict)));
 
                             }
                             else if (code[1] == "+=")
