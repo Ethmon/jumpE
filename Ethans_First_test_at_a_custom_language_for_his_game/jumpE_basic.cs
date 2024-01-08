@@ -17,6 +17,8 @@ using Jace.Tokenizer;
 using Jace.Util;
 using Jace;
 using System.CodeDom.Compiler;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+// In order for us to do functions i am going to create a list of int and when we go into a function we add a new int wich is the line number and when we want to return we use the last line number, jump to that line, and then removed the last line number from the list.
 namespace jumpE_basic
 {
     class jumpE_basic
@@ -184,6 +186,7 @@ namespace jumpE_basic
         public List<string> code = new List<string>();
         public List<string> lines = new List<string>();
         public string taken_in_string;
+        public List<int> positions = new List<int>();
         SimpleTokenizer ourstuff = new SimpleTokenizer();
         CommandRegistry commandRegistry = new CommandRegistry();
         DATA_CONVERTER.Data data;
@@ -199,13 +202,13 @@ namespace jumpE_basic
             this.position = 0;
             this.run = true;
             this.data = data;
-
+            data.setI("LNT", 0);
 
             while (this.run)
             {
                 this.code = ourstuff.Tokenizer(this.lines[this.position]);
                 data.setI("LNC", this.position);
-                data.setI("LNT", this.position);
+                data.setI("LNT", data.referenceI("LNT")+1);
                 if (commandRegistry.ContainsCommand(this.code[0]))
                 {
 
@@ -222,7 +225,7 @@ namespace jumpE_basic
                 }
                 else
                 {
-                    Console.WriteLine("Unknown command: " + this.code[0]);
+                    //Console.WriteLine("Unknown command: " + this.code[0]);
                 }
                 if (this.run == false)
                 {
@@ -322,7 +325,9 @@ namespace jumpE_basic
                 string_func string_Func = new string_func(Math_equation, this);
                 int_func int_func = new int_func(Math_equation,this);
                 when when = new when(Math_equation, this);
-                commands.Add("when", when); commands.Add("When", when);
+                return_func return_Func = new return_func();
+                commands.Add("return", return_Func); commands.Add("Return", return_Func); commands.Add("RETURN", return_Func); commands.Add("<<", return_Func);
+                commands.Add("when", when); commands.Add("When", when);commands.Add("if", when);
                 commands.Add("useC", useC); commands.Add("usec", useC);
                 commands.Add("print", print); commands.Add("Print", print);
                 commands.Add("inputI", inputI); commands.Add("inputi", inputI);commands.Add("InputI", inputI);
@@ -389,22 +394,38 @@ namespace jumpE_basic
             {
                 try
                 {
-                    string Message = "";
-
+                    //int color = 15;
+                    //string Message = "";
+                    
                     for (int i = 1; i < code.Count; i++)
                     {
-                        if (code[i] == "\""&&code[i+2] == "\"")
+                        if (code[i] == "\\Clear ")
                         {
-                            Message += D.referenceVar(code[i + 1]) + " ";
+                            Console.Clear();
+                        }
+                        else if (code[i] == "\\n")
+                        {
+                            Console.WriteLine();
+                        }
+                        /*else if (code[i] == "\\Color")
+                        {
+                            Console.Writeint.Parse(code[i + 1]));
+                            
+                            i++;
+                        }*/
+                        else if (code[i] == "\""&&code[i+2] == "\"")
+                        {
+                            Console.Write(D.referenceVar(code[i + 1]) + " ");
+
                             i += 2;
                         }
                         else
                         {
-                            Message += code[i] + " ";
+                            Console.Write(code[i] + " ");
                         }
 
                     }
-                    Console.WriteLine(Message);
+                    Console.WriteLine();
                 }
                 catch(Exception e){
                     Console.WriteLine(e + " Line: " + Base.get_position());
@@ -438,7 +459,7 @@ namespace jumpE_basic
 
                     }*/ // this will be for booleans when i get around to 
                     //else { }
-                        for (int i = 2; i < code.Count(); i++)
+                        for (int i = 1; i < code.Count(); i++)
                         {
                             double j;
                             if (Double.TryParse(code[i], out j))
@@ -463,10 +484,32 @@ namespace jumpE_basic
                         }
                         CalculationEngine engine = new CalculationEngine();
                     bool result = Convert.ToBoolean(engine.Calculate(equation));
-                    if (result)
+                    if (!result)
                     {
-                        if (D.isnumvar(code[1])){ Base.changePosition((int)D.referenceVar(code[1])); }
-                        else { Base.changePosition(int.Parse(code[1])); }
+                        int w = 0;
+                        int q = Base.position+1;
+                        while (true)
+                        {
+
+
+                            if (Base.lines[q] == "{")
+                            {
+                                w++;
+                            }
+                            if (Base.lines[q] == "}")
+                            {
+                                if (w == 1)
+                                {
+                                    Base.changePosition(q);
+                                    break;
+                                }
+                                else
+                                {
+                                    w--;
+                                }
+                            }
+                            q++;
+                        }
                     }
 
                 }
@@ -1848,6 +1891,14 @@ namespace Imported_commands
                 base.Execute(code, D, Base);
             }
         }*/
+        public class return_func : command_centrall
+        {
+            public override void Execute(List<string> code, DATA_CONVERTER.Data D, base_runner Base)
+            {
+                Base.changePosition(Base.positions[Base.positions.Count-1]);
+                Base.positions.RemoveAt(Base.positions.Count - 1);
+            }
+        }
         public class jump : command_centrall
         {
             public override void Execute(List<string> code, DATA_CONVERTER.Data D, base_runner Base)
@@ -1857,12 +1908,24 @@ namespace Imported_commands
                     int a;
                     if (D.inint(code[1]))
                     {
-                        a = (D.referenceI(code[2]));
+                        a = (D.referenceI(code[1]));
                         Base.changePosition(a);
                     }
                     else if(int.TryParse(code[1],out a))
                     {
                         Base.changePosition(a);
+                    }
+                    else if (code[1] == ">>")
+                    {
+                        foreach (string i in Base.lines)
+                        {
+                            if(i == ">> " + code[2])
+                            {
+                                D.setI(code[2], Base.get_position());
+                                Base.positions.Add(Base.get_position());
+                                Base.changePosition(Base.lines.IndexOf(i));
+                            }
+                        }
                     }
                 }
                 catch(Exception e)

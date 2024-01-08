@@ -33,6 +33,7 @@ namespace DATA_CONVERTER
         Dictionary<string, double> doubles = new Dictionary<string, double>();
         Dictionary<string, int> integers = new Dictionary<string, int>();
         Dictionary<string, Window> windows = new Dictionary<string, Window>();
+        Dictionary<string, Dictionary<string, Object >> custom_types = new Dictionary<string, Dictionary<string, Object>>();
         public string referenceS(string key)
         {
             if (strings.ContainsKey(key))
