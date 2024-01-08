@@ -395,7 +395,7 @@ namespace jumpE_basic
                 try
                 {
                     //int color = 15;
-                    //string Message = "";
+                    string Message = "";
                     
                     for (int i = 1; i < code.Count; i++)
                     {
@@ -415,17 +415,17 @@ namespace jumpE_basic
                         }*/
                         else if (code[i] == "\""&&code[i+2] == "\"")
                         {
-                            Console.Write(D.referenceVar(code[i + 1]) + " ");
+                            Message += (D.referenceVar(code[i + 1]) + " ");
 
                             i += 2;
                         }
                         else
                         {
-                            Console.Write(code[i] + " ");
+                            Message += (code[i] + " ");
                         }
 
                     }
-                    Console.WriteLine();
+                    Console.WriteLine(Message);
                 }
                 catch(Exception e){
                     Console.WriteLine(e + " Line: " + Base.get_position());
