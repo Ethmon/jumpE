@@ -11,13 +11,8 @@ using System.Reflection;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;
 using Microsoft.CSharp;
-using Jace.Execution;
-using Jace.Operations;
-using Jace.Tokenizer;
-using Jace.Util;
 using Jace;
 using System.CodeDom.Compiler;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 // In order for us to do functions i am going to create a list of int and when we go into a function we add a new int wich is the line number and when we want to return we use the last line number, jump to that line, and then removed the last line number from the list.
 namespace jumpE_basic
 {
@@ -1233,7 +1228,7 @@ namespace Imported_commands
                     {
                         try
                         {
-                            Console.Write("Enter a double value: ");
+                            //Console.Write("Enter a double value: ");
                             string rans = Console.ReadLine();
 
                             if (double.TryParse(rans, out double ran))
@@ -1267,7 +1262,7 @@ namespace Imported_commands
                     {
                         try
                         {
-                            Console.Write("Enter an integer value: ");
+                            //Console.Write("Enter an integer value: ");
                             string rans = Console.ReadLine();
 
                             if (int.TryParse(rans, out int ran))
@@ -1301,7 +1296,7 @@ namespace Imported_commands
                     {
                         try
                         {
-                            Console.Write("Enter a string: ");
+                            //Console.Write("Enter a string: ");
                             string rans = Console.ReadLine();
                                 D.setS(code[1], rans);
                                 inputSuccess = true;
