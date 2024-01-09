@@ -1429,7 +1429,7 @@ namespace Imported_commands
                                 equation += j + " ";
                             }
                             else if (code[i] == "+" || code[i] == "-" || code[i] == "/" || code[i] == "*" || code[i] == "sin" || code[i] == "cos" || code[i] == "tan" ||
-                            code[i] == "csc" || code[i] == "sec" || code[i] == "cot" || code[i] == "root" || code[i] == ")" || code[i] == "(" || code[i] == " ")
+                            code[i] == "csc" || code[i] == "sec" || code[i] == "%" || code[i] == "cot" || code[i] == "root" || code[i] == ")" || code[i] == "(" || code[i] == " ")
                             {
                                 equation += code[i] + " ";
                             }
@@ -1470,7 +1470,7 @@ namespace Imported_commands
                                 {
                                     equation += j + " ";
                                 }
-                                else if (code[i] == "+" || code[i] == "-" || code[i] == "/" || code[i] == "*" || code[i] == "sin" || code[i] == "cos" || code[i] == "tan" ||
+                                else if (code[i] == "+" || code[i] == "-" || code[i] == "/" || code[i] == "*" || code[i] == "sin" || code[i] == "cos" || code[i] == "%" || code[i] == "tan" ||
                                 code[i] == "csc" || code[i] == "sec" || code[i] == "cot" || code[i] == "root" || code[i] == ")" || code[i] == "(" || code[i] == " ")
                                 {
                                     equation += code[i] + " ";
@@ -1493,7 +1493,7 @@ namespace Imported_commands
                                 {
                                     equation += j + " ";
                                 }
-                                else if (code[i] == "+" || code[i] == "-" || code[i] == "/" || code[i] == "*" || code[i] == "sin" || code[i] == "cos" || code[i] == "tan" ||
+                                else if (code[i] == "+" || code[i] == "-" || code[i] == "/" || code[i] == "*" || code[i] == "sin" || code[i] == "cos" || code[i] == "tan" || code[i] == "%" ||
                                 code[i] == "csc" || code[i] == "sec" || code[i] == "cot" || code[i] == "root" || code[i] == ")" || code[i] == "(" || code[i] == " ")
                                 {
                                     equation += code[i] + " ";
@@ -1516,7 +1516,7 @@ namespace Imported_commands
                                 {
                                     equation += j + " ";
                                 }
-                                else if (code[i] == "+" || code[i] == "-" || code[i] == "/" || code[i] == "*" || code[i] == "sin" || code[i] == "cos" || code[i] == "tan" ||
+                                else if (code[i] == "+" || code[i] == "-" || code[i] == "/" || code[i] == "*" || code[i] == "%" || code[i] == "sin" || code[i] == "cos" || code[i] == "tan" ||
                                 code[i] == "csc" || code[i] == "sec" || code[i] == "cot" || code[i] == "root" || code[i] == ")" || code[i] == "(" || code[i] == " ")
                                 {
                                     equation += code[i] + " ";
@@ -1539,7 +1539,7 @@ namespace Imported_commands
                                 {
                                     equation += j + " ";
                                 }
-                                else if (code[i] == "+" || code[i] == "-" || code[i] == "/" || code[i] == "*" || code[i] == "sin" || code[i] == "cos" || code[i] == "tan" ||
+                                else if (code[i] == "+" || code[i] == "-" || code[i] == "/" || code[i] == "*" || code[i] == "%" || code[i] == "sin" || code[i] == "cos" || code[i] == "tan" ||
                                 code[i] == "csc" || code[i] == "sec" || code[i] == "cot" || code[i] == "root" || code[i] == ")" || code[i] == "(" || code[i] == " ")
                                 {
                                     equation += code[i] + " ";
@@ -1563,7 +1563,7 @@ namespace Imported_commands
                                     equation += j + " ";
                                 }
                                 else if (code[i] == "+" || code[i] == "-" || code[i] == "/" || code[i] == "*" || code[i] == "sin" || code[i] == "cos" || code[i] == "tan" ||
-                                code[i] == "csc" || code[i] == "sec" || code[i] == "cot" || code[i] == "root" || code[i] == ")" || code[i] == "(" || code[i] == " ")
+                                code[i] == "csc" || code[i] == "sec" || code[i] == "cot" || code[i] == "root" || code[i] == "%" || code[i] == ")" || code[i] == "(" || code[i] == " ")
                                 {
                                     equation += code[i] + " ";
                                 }
@@ -1611,7 +1611,7 @@ namespace Imported_commands
                                         equation += j + " ";
                                     }
                                     else if (code[i] == "+" || code[i] == "-" || code[i] == "/" || code[i] == "*" || code[i] == "sin" || code[i] == "cos" || code[i] == "tan" ||
-                                    code[i] == "csc" || code[i] == "sec" || code[i] == "cot" || code[i] == "root" || code[i] == ")" || code[i] == "(" || code[i] == " ")
+                                    code[i] == "csc" || code[i] == "sec" || code[i] == "cot" || code[i] == "%" || code[i] == "root" || code[i] == ")" || code[i] == "(" || code[i] == " ")
                                     {
                                         equation += code[i] + " ";
                                     }
@@ -1634,7 +1634,7 @@ namespace Imported_commands
                                         equation += j + " ";
                                     }
                                     else if (code[i] == "+" || code[i] == "-" || code[i] == "/" || code[i] == "*" || code[i] == "sin" || code[i] == "cos" || code[i] == "tan" ||
-                                    code[i] == "csc" || code[i] == "sec" || code[i] == "cot" || code[i] == "root" || code[i] == ")" || code[i] == "(" || code[i] == " ")
+                                    code[i] == "csc" || code[i] == "sec" || code[i] == "cot" || code[i] == "%" || code[i] == "root" || code[i] == ")" || code[i] == "(" || code[i] == " ")
                                     {
                                         equation += code[i] + " ";
                                     }
@@ -1657,7 +1657,7 @@ namespace Imported_commands
                                         equation += j + " ";
                                     }
                                     else if (code[i] == "+" || code[i] == "-" || code[i] == "/" || code[i] == "*" || code[i] == "sin" || code[i] == "cos" || code[i] == "tan" ||
-                                    code[i] == "csc" || code[i] == "sec" || code[i] == "cot" || code[i] == "root" || code[i] == ")" || code[i] == "(" || code[i] == " ")
+                                    code[i] == "csc" || code[i] == "sec" || code[i] == "cot" || code[i] == "%" || code[i] == "root" || code[i] == ")" || code[i] == "(" || code[i] == " ")
                                     {
                                         equation += code[i] + " ";
                                     }
@@ -1680,7 +1680,7 @@ namespace Imported_commands
                                         equation += j + " ";
                                     }
                                     else if (code[i] == "+" || code[i] == "-" || code[i] == "/" || code[i] == "*" || code[i] == "sin" || code[i] == "cos" || code[i] == "tan" ||
-                                    code[i] == "csc" || code[i] == "sec" || code[i] == "cot" || code[i] == "root" || code[i] == ")" || code[i] == "(" || code[i] == " ")
+                                    code[i] == "csc" || code[i] == "sec" || code[i] == "cot" || code[i] == "%" || code[i] == "root" || code[i] == ")" || code[i] == "(" || code[i] == " ")
                                     {
                                         equation += code[i] + " ";
                                     }
@@ -1703,7 +1703,7 @@ namespace Imported_commands
                                         equation += j + " ";
                                     }
                                     else if (code[i] == "+" || code[i] == "-" || code[i] == "/" || code[i] == "*" || code[i] == "sin" || code[i] == "cos" || code[i] == "tan" ||
-                                    code[i] == "csc" || code[i] == "sec" || code[i] == "cot" || code[i] == "root" || code[i] == ")" || code[i] == "(" || code[i] == " ")
+                                    code[i] == "csc" || code[i] == "sec" || code[i] == "cot" || code[i] == "%" || code[i] == "root" || code[i] == ")" || code[i] == "(" || code[i] == " ")
                                     {
                                         equation += code[i] + " ";
                                     }
@@ -1741,7 +1741,7 @@ namespace Imported_commands
                 }
                 if (D.instring(code[0]))
                 {
-                    string mesage = D.referenceS(code[1]);
+                    string mesage = D.referenceS(code[0]);
                     if(code[1] == "=")
                     {
                         mesage = "";
@@ -1799,10 +1799,10 @@ namespace Imported_commands
                         D.setS(code[1], mesage);
                         this.commands.add_command(code[1], this.varlee);
                     }
-                    else if (code[1] == "=")
+                    else if (code[2] == "=")
                     {
                         mesage = "";
-                        for (int i = 2; i < code.Count(); i++)
+                        for (int i = 3; i < code.Count(); i++)
                         {
                             if (code[i] == "\"" && code[i + 2] == "\"")
                             {
@@ -1856,7 +1856,7 @@ namespace Imported_commands
                                 equation += j + " ";
                             }
                             else if (code[i] == "+" || code[i] == "-" || code[i] == "/" || code[i] == "*" || code[i] == "sin" || code[i] == "cos" || code[i] == "tan" ||
-                            code[i] == "csc" || code[i] == "sec" || code[i] == "cot" || code[i] == "root" || code[i] == ")" || code[i] == "(" || code[i] == " ")
+                            code[i] == "csc" || code[i] == "sec" || code[i] == "%" || code[i] == "cot" || code[i] == "root" || code[i] == ")" || code[i] == "(" || code[i] == " ")
                             {
                                 equation += code[i] + " ";
                             }
