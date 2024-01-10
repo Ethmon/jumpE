@@ -13,7 +13,6 @@ using System.Reflection;
 using Microsoft.CSharp;
 using Jace;
 using System.CodeDom.Compiler;
-// In order for us to do functions i am going to create a list of int and when we go into a function we add a new int wich is the line number and when we want to return we use the last line number, jump to that line, and then removed the last line number from the list.
 namespace jumpE_basic
 {
     class jumpE_basic
@@ -202,12 +201,12 @@ namespace jumpE_basic
 
             while (this.run)
             {
-                this.code = ourstuff.Tokenizer(this.lines[this.position]);
-                data.setI("LNC", this.position);
-                data.setI("LNT", data.referenceI("LNT") + 1);
+                this.code = ourstuff.Tokenizer(this.lines[this.position]);//get all commands in the line.
+                data.setI("LNC", this.position);// set line number for use as a variable in the code
+                data.setI("LNT", data.referenceI("LNT") + 1);//total amount of lines that have been run per session of the data converter
                 if (commandRegistry.ContainsCommand(this.code[0]))
                 {
-
+                    // distinguish between inner and outer commands, inner commands are commands that are built into the Basic interpreter (inner commands can allso be imported using useC),outer commands are commands that are imported using use.
                     interorouter = commandRegistry.GetCommandDefinition(this.code[0]);
                     if (interorouter is command_centrall)
                     {
@@ -298,30 +297,30 @@ namespace jumpE_basic
             Dictionary<string, DATA_CONVERTER.command_centralls> commands = new Dictionary<string, DATA_CONVERTER.command_centralls>();
             public CommandRegistry()
             {
-                print print = new print();
+                print print = new print();//prints to console, can use variables and strings by putting them in quotes(must be seperated by spaces)
                 //whenD whend = new whenD();
                 //whenS whens = new whenS();
-                setS setS = new setS();
-                use use = new use(this);
+                //setS setS = new setS();
+                use use = new use(this);//imports a command from a .cs file, you can either use the file path or put it in the same file as the .exe, these commands only include logic and do not have access to the data converter, they can be used to create neouter commands
                 //setD setD = new setD();
                 //add add = new add();
-                end end = new end();
+                end end = new end();//end the program
                 //subtract subtract = new subtract();
                 //multiply multiply = new multiply();
                 //divide divide = new divide();
-                jump jump = new jump();
-                inputD inputD = new inputD();
-                comment comment = new comment();
-                inputS inputS = new inputS();
-                inputI inputI = new inputI();
-                useC useC = new useC(this);
-                line_number line_number = new line_number();
-                pre_defined_variable Math_equation = new pre_defined_variable();
-                double_func double_func = new double_func(Math_equation, this);
-                string_func string_Func = new string_func(Math_equation, this);
-                int_func int_func = new int_func(Math_equation, this);
-                when when = new when(Math_equation, this);
-                return_func return_Func = new return_func();
+                jump jump = new jump();//jumps to a line number or calls a function use "JP >> {function name}" to call a function
+                inputD inputD = new inputD();//takes a double input and stores it in a variable, variable must allready be initalized
+                comment comment = new comment();// used to comment out lines of code, can be used with // or #
+                inputS inputS = new inputS();//takes a string input and stores it in a variable, variable must allready be initalized
+                inputI inputI = new inputI();//takes a int input and stores it in a variable, variable must allready be initalized
+                useC useC = new useC(this);//this is the full on stuff, this is used to just import code from a .cs file, can create both inner and outer commands, 
+                line_number line_number = new line_number();// returns the current line number to pre initalize variables. this is an alternatite to LNC
+                pre_defined_variable Math_equation = new pre_defined_variable();// this is not relivent to most, used for variables that have allready been initalzed, can be used to do math with variables
+                double_func double_func = new double_func(Math_equation, this);//this initalizes a variable as a double, can be used to do math with variables
+                string_func string_Func = new string_func(Math_equation, this);//this initalizes a variable as a string, can not be used to do math with variables
+                int_func int_func = new int_func(Math_equation, this);// this initalizes a variable as a int, can be used to do math with variables
+                when when = new when(Math_equation, this);//logic gate, can be used to create if statements, can be used to create while loops, can be used to create for loops, uses {}
+                return_func return_Func = new return_func();// returns to the last jump point, can be used to return from a function
                 commands.Add("return", return_Func); commands.Add("Return", return_Func); commands.Add("RETURN", return_Func); commands.Add("<<", return_Func);
                 commands.Add("when", when); commands.Add("When", when); commands.Add("if", when);
                 commands.Add("useC", useC); commands.Add("usec", useC);

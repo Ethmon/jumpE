@@ -7,3 +7,12 @@ C:\Users\ethan\source\repos\JEB\JEB\bin\Debug\Jace.dll
 C:\Users\ethan\source\repos\JEB\JEB\obj\Debug\JEB.csproj.CopyComplete
 C:\Users\ethan\source\repos\JEB\JEB\obj\Debug\JEB.exe
 C:\Users\ethan\source\repos\JEB\JEB\obj\Debug\JEB.pdb
+C:\Users\ethan\Source\Repos\JE\JEB\bin\Debug\JEB.exe.config
+C:\Users\ethan\Source\Repos\JE\JEB\bin\Debug\JEB.exe
+C:\Users\ethan\Source\Repos\JE\JEB\bin\Debug\JEB.pdb
+C:\Users\ethan\Source\Repos\JE\JEB\bin\Debug\Jace.dll
+C:\Users\ethan\Source\Repos\JE\JEB\obj\Debug\JEB.csproj.AssemblyReference.cache
+C:\Users\ethan\Source\Repos\JE\JEB\obj\Debug\JEB.csproj.CoreCompileInputs.cache
+C:\Users\ethan\Source\Repos\JE\JEB\obj\Debug\JEB.csproj.CopyComplete
+C:\Users\ethan\Source\Repos\JE\JEB\obj\Debug\JEB.exe
+C:\Users\ethan\Source\Repos\JE\JEB\obj\Debug\JEB.pdb
